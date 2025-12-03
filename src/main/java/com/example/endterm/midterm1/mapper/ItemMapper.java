@@ -5,6 +5,7 @@ import com.example.endterm.midterm1.entity.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+
 import java.util.List;
 
 @Mapper(componentModel = "spring")
