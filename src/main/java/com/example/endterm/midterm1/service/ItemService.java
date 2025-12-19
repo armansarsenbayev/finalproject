@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ItemService {
     List<ItemDto> getAll();
-    ItemDto getById(long id);
+    ItemDto getById(Long id);
+
     ItemDto addItem(ItemDto itemDto);
-    ItemDto updateItem(Long id, ItemDto itemDto);
-    ItemDto deleteItem(Long id, ItemDto itemDto);
+    ItemDto updateById(Long id, ItemDto itemDto);
     boolean deletebyId(long id);
 }
