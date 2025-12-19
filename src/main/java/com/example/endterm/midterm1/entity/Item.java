@@ -17,6 +17,7 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_id")
     private Long id;
 
     private String name;
@@ -30,5 +31,10 @@ public class Item {
     private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "t_item_countries",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
     private List<Country> countries;
 }
