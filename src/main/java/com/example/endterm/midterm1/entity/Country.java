@@ -15,12 +15,9 @@ import lombok.Setter;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
     private Long id;
 
-    @Column(name = "code")
     private String code;
 
-    @Column(name = "country")
     private String country;
 }
