@@ -38,6 +38,19 @@ public class ItemServiceTest {
 
     @Test
     void getByIdTest() {
+
+        List<ItemDto> all = itemService.getAll();
+
+        if (all.isEmpty()) {
+            ItemDto created = new ItemDto();
+            created.setNameDto("seed-item");
+            created.setPriceDto(100);
+
+            ItemDto added = itemService.addItem(created);
+            Assertions.assertNotNull(added);
+
+            all = itemService.getAll();
+        }
         Random random = new Random();
 
         int randomIndex = random.nextInt(itemService.getAll().size());
