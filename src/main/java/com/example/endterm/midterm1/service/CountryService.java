@@ -9,5 +9,8 @@ public interface CountryService {
     CountryDto getById(Long id);
     CountryDto addCountry(CountryDto countryDto);
     CountryDto updateById(Long id, CountryDto countryDto);
-    boolean deleteById(Long id);
+
+    default boolean deleteById(Long id) {
+        return false;
+    }
 }

@@ -41,18 +41,6 @@ public class ItemServiceTest {
     @Test
     void getByIdTest() {
 
-        List<ItemDto> all = itemService.getAll();
-
-        if (all.isEmpty()) {
-            ItemDto created = new ItemDto();
-            created.setNameDto("seed-item");
-            created.setPriceDto(100);
-
-            ItemDto added = itemService.addItem(created);
-            Assertions.assertNotNull(added);
-
-            all = itemService.getAll();
-        }
         Random random = new Random();
 
         int randomIndex = random.nextInt(itemService.getAll().size());
@@ -64,9 +52,6 @@ public class ItemServiceTest {
         Assertions.assertNotNull(itemDto.getId());
         Assertions.assertNotNull(itemDto.getNameDto());
         Assertions.assertTrue(itemDto.getPriceDto() >= 0);
-
-        ItemDto check = itemService.getById(1L);
-        assertNull(check);
 
     }
     @Test

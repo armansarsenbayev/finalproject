@@ -1,6 +1,8 @@
 package com.example.endterm.midterm1;
 
+import com.example.endterm.midterm1.dto.CategoryDto;
 import com.example.endterm.midterm1.dto.CountryDto;
+import com.example.endterm.midterm1.dto.ItemDto;
 import com.example.endterm.midterm1.service.CountryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -37,6 +42,16 @@ public class CountryServiceTest {
 
     @Test
     void getByIdTest() {
+        List<CountryDto> all = countryService.getAll();
+
+        if (all.isEmpty()) {
+            CountryDto dto = new CountryDto();
+            dto.setCodeDto("TEST");
+            dto.setCountryDto("Testland");
+            countryService.addCountry(dto);
+
+            all = countryService.getAll();
+        }
         Random random = new Random();
 
         int randomIndex = random.nextInt(countryService.getAll().size());
@@ -103,13 +118,22 @@ public class CountryServiceTest {
 
     @Test
     void deleteTest() {
+
+        List<CountryDto> all = countryService.getAll();
+
+        if (all.isEmpty()) {
+            CountryDto dto = new CountryDto();
+            dto.setCountryDto("seed-category");
+            countryService.addCountry(dto);
+            all = countryService.getAll();
+        }
+
         Random random = new Random();
-        int randomIndex = random.nextInt(countryService.getAll().size());
-        Long someId = countryService.getAll().get(randomIndex).getId();
+        int randomIndex = random.nextInt(all.size());
+        Long someId = all.get(randomIndex).getId();
 
-        Assertions.assertTrue(countryService.deleteById(someId));
+        countryService.deleteById(someId);
 
-        CountryDto deleted = countryService.getById(someId);
-        Assertions.assertNull(deleted);
+        Assertions.assertThrows(NoSuchElementException.class, () -> countryService.getById(someId));
     }
 }

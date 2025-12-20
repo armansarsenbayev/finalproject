@@ -25,9 +25,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryDto getById(Long id) {
-        Country country = countryRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Not found"));
-        return countryMapper.toDto(country);
+        return countryMapper.toDto(countryRepository.findById(id).orElse(null));
     }
 
     @Override
