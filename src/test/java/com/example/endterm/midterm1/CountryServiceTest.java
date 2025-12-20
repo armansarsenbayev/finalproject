@@ -118,22 +118,25 @@ public class CountryServiceTest {
 
     @Test
     void deleteTest() {
-
         List<CountryDto> all = countryService.getAll();
 
         if (all.isEmpty()) {
             CountryDto dto = new CountryDto();
-            dto.setCountryDto("seed-category");
+            dto.setCodeDto("TEST");
+            dto.setCountryDto("Testland");
             countryService.addCountry(dto);
+
             all = countryService.getAll();
         }
-
         Random random = new Random();
-        int randomIndex = random.nextInt(all.size());
-        Long someId = all.get(randomIndex).getId();
+        int randomId = random.nextInt(countryService.getAll().size());
+        Long someId = countryService.getAll().get(randomId).getId();
 
-        countryService.deleteById(someId);
+        Assertions.assertTrue(countryService.deleteById(someId));
 
-        Assertions.assertThrows(NoSuchElementException.class, () -> countryService.getById(someId));
+        CountryDto deleted = countryService.getById(someId);
+
+        Assertions.assertNull(deleted);
     }
 }
+
