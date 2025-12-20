@@ -11,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -64,7 +66,7 @@ public class ItemServiceTest {
         Assertions.assertTrue(itemDto.getPriceDto() >= 0);
 
         ItemDto check = itemService.getById(1L);
-        Assertions.assertNull(check);
+        assertNull(check);
 
     }
     @Test
@@ -142,7 +144,7 @@ public class ItemServiceTest {
         Assertions.assertTrue(itemService.deletebyId(someIndex));
 
         ItemDto deleted = itemService.getById(someIndex);
-        Assertions.assertNull(deleted);
+        assertNull(deleted);
     }
      }
 
