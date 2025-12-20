@@ -1,7 +1,6 @@
 package com.example.endterm.midterm1.mapper;
 
 import com.example.endterm.midterm1.dto.CategoryDto;
-import com.example.endterm.midterm1.dto.CountryDto;
 import com.example.endterm.midterm1.entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
